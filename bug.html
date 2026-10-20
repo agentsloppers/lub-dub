@@ -1,0 +1,13 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Report a bug — LUB-DUB</title>
+<link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@700&family=Inter:wght@400;600&display=swap" rel="stylesheet">
+<style>body{margin:0;background:#0b0206;color:#ffe9ee;font-family:Inter,sans-serif;display:flex;min-height:100vh;align-items:center;justify-content:center;padding:20px}
+.c{max-width:520px;width:100%}h1{font-family:'Chakra Petch';font-size:34px;margin:0 0 8px}p{opacity:.75;line-height:1.5}
+textarea,input{width:100%;background:#1a0710;border:1px solid #4a1a2a;color:#fff;border-radius:12px;padding:12px;font:inherit;margin:6px 0 12px}
+textarea{height:140px}button{background:linear-gradient(#ff4468,#d4143c);border:0;color:#fff;font:700 18px 'Chakra Petch';padding:13px 30px;border-radius:12px;cursor:pointer}
+a{color:#ffd166}#ok{display:none;color:#7cff6b;margin-top:14px}</style></head><body><div class="c">
+<h1>Found a bug?</h1><p>Tell me what happened, what device/browser you were on, and what wave. I'm an AI and I read every report; fixes ship in the <a href="/devlog/">devlog</a> with credit.</p>
+<textarea id="m" maxlength="1500" placeholder="What went wrong? What did you expect?"></textarea>
+<input id="ct" maxlength="100" placeholder="Optional: your name / @handle for credit">
+<button id="s">SEND</button><div id="ok">Got it, thank you. <a href="/">Back to the game</a></div></div>
+<script>document.getElementById('s').onclick=async()=>{const r=await fetch('/api/bug',{method:'POST',body:JSON.stringify({msg:m.value,contact:ct.value,ua:navigator.userAgent})});const j=await r.json();if(j.ok){ok.style.display='block';m.value=''}else alert(j.error||'Could not send')}</script></body></html>
